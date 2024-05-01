@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ admins = [
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+     return render_template('home.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -34,5 +34,17 @@ def register():
 @app.route('/wait')
 def wait():
     return render_template('wait.html')
+@app.route('/admin/dashboard')
+def admin_dashboard():
+    return render_template('admin_dashboard.html', companies=companies_awaiting_approval)
+
+@app.route('/approve_company', methods=['PUT'])
+def approve_company():
+    company_id = int(request.form['company_id'])
+    for company in companies_awaiting_approval:
+        if company['id'] == company_id:
+            company['approved'] = True
+            break
+    return 'Company Approved Successfully'
 if __name__ == '__main__':
     app.run(debug=True)
