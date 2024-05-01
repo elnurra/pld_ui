@@ -31,5 +31,8 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/wait')
+def wait():
+    return render_template('wait.html')
 if __name__ == '__main__':
     app.run(debug=True)
