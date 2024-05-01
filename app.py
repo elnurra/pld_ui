@@ -4,10 +4,11 @@ app = Flask(__name__)
 
 # Mock data for companies awaiting approval
 companies_awaiting_approval = [
-    {"name": "Company A"},
-    {"name": "Company B"},
-    {"name": "Company C"}
+    {"id": 1, "name": "Company A", "approved": False},
+    {"id": 2, "name": "Company B", "approved": True},
+    {"id": 3, "name": "Company C", "approved": False}
 ]
+
 
 # Mock data for admins
 admins = [
@@ -38,7 +39,7 @@ def wait():
 def admin_dashboard():
     return render_template('admin_dashboard.html', companies=companies_awaiting_approval)
 
-@app.route('/approve_company', methods=['PUT'])
+@app.route('/approve_company', methods=['POST'])
 def approve_company():
     company_id = int(request.form['company_id'])
     for company in companies_awaiting_approval:
@@ -46,5 +47,6 @@ def approve_company():
             company['approved'] = True
             break
     return 'Company Approved Successfully'
+
 if __name__ == '__main__':
     app.run(debug=True)
