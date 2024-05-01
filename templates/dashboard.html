@@ -10,6 +10,19 @@
 
 <body>
     <div class="dashboard-container">
+        <header>
+            <div class="container">
+                <h1>Company App</h1>
+                <nav>
+                    <ul>
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/user/dashboard">User Dashboard</a></li>
+                        <li><a href="/admin/dashboard">Admin Dashboard</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
         <h2>Companies Awaiting Approval</h2>
         <ul>
             {% for company in companies %}
